@@ -1,2 +1,10 @@
 /Smage.iml
 /.idea/
+
+# compiled java classes and the
+# /target/ directory used by maven builds
+*.class
+/target/
+
+# .DS_STORE used by MacOS to index files
+.DS_STORE
