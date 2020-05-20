@@ -48,4 +48,10 @@ public class GameRoom {
     public void save() {
 
     }
+
+    public void update() {
+        for(GameObject object : objects) {
+            object.fixedUpdate();
+        }
+    }
 }

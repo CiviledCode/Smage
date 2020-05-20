@@ -22,4 +22,12 @@ public class GameObject {
 
     }
 
+    /**
+     * This is a loop that is ran as a priority over tick, preTick, and draw
+     * This should handle things such as collisions and physics to keep parity between
+     * devices in terms of physics
+     */
+    public void fixedUpdate() {
+
+    }
 }
