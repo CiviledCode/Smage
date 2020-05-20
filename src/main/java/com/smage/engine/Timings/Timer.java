@@ -7,8 +7,9 @@ public class Timer extends Thread {
     public int framesPerSecond;
     public int currentFrame;
     public int currentFramesPerSecond;
-    public int currentUpdate;
-    public int updatesPerSecond;
+    public int currentTick;
+    public int ticksPerSecond = 20;
+    public double fixedDeltaTime = 1000/framesPerSecond;
     private long lastSecondMillis;
     private long lastUpdateMillis;
 
@@ -24,7 +25,7 @@ public class Timer extends Thread {
         int sleepLength = 1000/framesPerSecond;
 
         //The amount of time the thread should take to update
-        int updateTime = sleepLength * (framesPerSecond/updatesPerSecond);
+        int tickTime = sleepLength * (framesPerSecond/ticksPerSecond);
 
         //The amount of milliseconds that the frame second should last for
         int milliSecondsPerFrameSecond = sleepLength * framesPerSecond;
@@ -38,22 +39,22 @@ public class Timer extends Thread {
             try {
                 lastFrameMilli = System.currentTimeMillis();
                 Thread.sleep(sleepLengthImprovised);
-                room.tick();
+                room.update();
                 currentFrame++;
 
 
                 //If the system detects that an update needs to be done
-                if(System.currentTimeMillis() > lastUpdateMillis + updateTime && currentUpdate < updatesPerSecond) {
+                if(System.currentTimeMillis() > lastUpdateMillis + tickTime && currentTick < ticksPerSecond) {
 
                     //Run the update function
-                    room.update();
-                    currentUpdate++;
+                    room.fixedTick();
+                    currentTick++;
 
-                    //If there is a thread backlog and it's lagging, prioritize running the update to make it a more accurate simulation rather than frames
-                    if(((int)(System.currentTimeMillis() - lastSecondMillis)/updateTime) > currentUpdate) {
-                        for(int i = 0; i < ((int)(System.currentTimeMillis() - lastSecondMillis)/updateTime) - currentUpdate; i++) {
-                            room.update();
-                            currentUpdate++;
+                    //If there is a thread backlog and it's lagging, prioritize running the tick to make it a more accurate simulation rather than frames
+                    if(((int)(System.currentTimeMillis() - lastSecondMillis)/tickTime) > currentTick) {
+                        for(int i = 0; i < ((int)(System.currentTimeMillis() - lastSecondMillis)/tickTime) - currentTick; i++) {
+                            room.fixedTick();
+                            currentTick++;
                         }
                     }
                 }
@@ -61,6 +62,7 @@ public class Timer extends Thread {
                 //If a single second has gone by, log the lastSecond and set the FPS count and reset frame count
                 if(System.currentTimeMillis() > lastSecondMillis + milliSecondsPerFrameSecond) {
                     currentFrame = 1;
+                    currentTick = 1;
                     lastSecondMillis = System.currentTimeMillis();
                     currentFramesPerSecond = currentFrame;
                 }

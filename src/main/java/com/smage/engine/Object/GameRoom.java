@@ -29,19 +29,17 @@ public class GameRoom {
         objects.remove(object);
     }
 
-    public void tick() {
+    public void update() {
         for(GameObject object : objects) {
-            object.preTick();
+            object.preUpdate();
         }
 
         for(GameObject object : objects) {
             object.draw(graphicsContext);
         }
 
-        //window.paint();
-
         for(GameObject object : objects) {
-            object.tick();
+            object.update();
         }
     }
 
@@ -49,9 +47,9 @@ public class GameRoom {
 
     }
 
-    public void update() {
+    public void fixedTick() {
         for(GameObject object : objects) {
-            object.fixedUpdate();
+            object.fixedTick();
         }
     }
 }
