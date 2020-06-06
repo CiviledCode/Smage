@@ -12,9 +12,11 @@ import javafx.stage.Stage;
 import java.io.File;
 
 public class GameWindow extends Application {
+    public static final String SMAGE_VERSION = "In-Dev v0.1";
+
     public static int windowWidth = 1080, windowHeight = 720;
     public static int fps = 60;
-    public static String title = "";
+    public static String title = "Smage " + SMAGE_VERSION;
     private static boolean fullscreen;
     private static Scene scene;
     private static Stage mainStage;
@@ -54,7 +56,6 @@ public class GameWindow extends Application {
         primaryStage.setTitle(title);
         primaryStage.setAlwaysOnTop(true);
         primaryStage.setFullScreen(fullscreen);
-        primaryStage.maximizedProperty();
         primaryStage.setResizable(false);
         primaryStage.setOnCloseRequest(event -> {
             Platform.exit();
@@ -137,7 +138,7 @@ public class GameWindow extends Application {
             windowHeight = height;
             mainGroup = new Group();
             scene = new Scene(mainGroup);
-            canvas = new Canvas(windowWidth, windowHeight);
+            canvas = new Canvas(width, height);
             mainGroup.getChildren().add(canvas);
         } else {
             windowWidth = width;

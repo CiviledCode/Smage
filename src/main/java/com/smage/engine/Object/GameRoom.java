@@ -1,6 +1,7 @@
 package com.smage.engine.Object;
 
 import com.smage.engine.Timings.Timer;
+import com.smage.engine.Utilities.Color;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Paint;
 
@@ -56,7 +57,7 @@ public class GameRoom {
     }
 
     private void cleanWindow() {
-        graphicsContext.setFill(Paint.valueOf("#000000"));
-        graphicsContext.fillRect(0,0, GameWindow.windowWidth, GameWindow.windowHeight);
+        graphicsContext.setFill(Color.BLACK);
+        graphicsContext.fillRect(0,0, GameWindow.windowWidth + 10, GameWindow.windowHeight + 10);
     }
 }
