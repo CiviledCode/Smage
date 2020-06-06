@@ -12,11 +12,13 @@ import javafx.stage.Stage;
 import java.io.File;
 
 public class GameWindow extends Application {
-    static int windowWidth = 1080, windowHeight = 720;
-    static int fps = 60;
-    static String title = "";
-    static boolean fullscreen;
-    static Scene scene;
+    public static int windowWidth = 1080, windowHeight = 720;
+    public static int fps = 60;
+    public static String title = "";
+    private static boolean fullscreen;
+    private static Scene scene;
+    private static Stage mainStage;
+    private static Group mainGroup;
     private static GameRoom room;
     public static Canvas canvas;
     public static GameInstance gameInstance;
@@ -27,6 +29,8 @@ public class GameWindow extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        //Initialize what the mainStage is
+        mainStage = primaryStage;
 
         //Gets the game jarfile
         ClassFunctions functions = new ClassFunctions();
@@ -58,18 +62,7 @@ public class GameWindow extends Application {
             System.exit(0);
         });
 
-        //Creates the group that we add the canvas to so we can easily draw
-        Group group = new Group();
-        scene = new Scene(group);
-        canvas = new Canvas(windowWidth, windowHeight);
-        group.getChildren().add(canvas);
-
-        //Sets the scene of the window to out canvas and shows the window
-        primaryStage.setScene(scene);
-        primaryStage.show();
-
-        //Sets the graphic object of the room and starts the game loop
-        room.graphicsContext = canvas.getGraphicsContext2D();
+        sizeScreen(windowWidth, windowHeight);
         room.start();
 
         //Gets the class defined inside mainClass and creates a new instance of it
@@ -127,5 +120,39 @@ public class GameWindow extends Application {
             }
         }
         return null;
+    }
+
+    /**
+     * Reinitializes the scenes graphics and canvas size to fit
+     * a certain dimension
+     * @param width
+     * @param height
+     */
+    public static void sizeScreen(int width, int height) {
+        mainStage.hide();
+
+        if(mainGroup == null) {
+            //Creates the group that we add the canvas to so we can easily draw
+            windowWidth = width;
+            windowHeight = height;
+            mainGroup = new Group();
+            scene = new Scene(mainGroup);
+            canvas = new Canvas(windowWidth, windowHeight);
+            mainGroup.getChildren().add(canvas);
+        } else {
+            windowWidth = width;
+            windowHeight = height;
+            canvas.setWidth(width); canvas.setHeight(height);
+            mainGroup.getChildren().clear();
+            mainGroup.getChildren().add(canvas);
+            scene = new Scene(mainGroup);
+        }
+
+        //Sets the scene of the window to out canvas and shows the window
+        mainStage.setScene(scene);
+        mainStage.show();
+
+        //Sets the graphic object of the room and starts the game loop
+        room.graphicsContext = canvas.getGraphicsContext2D();
     }
 }

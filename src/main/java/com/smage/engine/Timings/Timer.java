@@ -9,7 +9,6 @@ public class Timer extends Thread {
     public int currentFramesPerSecond;
     public int currentTick;
     public int ticksPerSecond = 20;
-    public double fixedDeltaTime = 1000/framesPerSecond;
     private long lastSecondMillis;
     private long lastUpdateMillis;
 

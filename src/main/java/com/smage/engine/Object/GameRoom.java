@@ -2,6 +2,7 @@ package com.smage.engine.Object;
 
 import com.smage.engine.Timings.Timer;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Paint;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,7 @@ public class GameRoom {
             object.preUpdate();
         }
 
+        cleanWindow();
         for(GameObject object : objects) {
             object.draw(graphicsContext);
         }
@@ -51,5 +53,10 @@ public class GameRoom {
         for(GameObject object : objects) {
             object.fixedTick();
         }
+    }
+
+    private void cleanWindow() {
+        graphicsContext.setFill(Paint.valueOf("#000000"));
+        graphicsContext.fillRect(0,0, GameWindow.windowWidth, GameWindow.windowHeight);
     }
 }
