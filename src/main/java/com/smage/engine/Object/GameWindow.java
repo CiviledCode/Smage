@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 import java.io.File;
 
 public class GameWindow extends Application {
-    public static final String SMAGE_VERSION = "In-Dev v0.1";
+    public static final String SMAGE_VERSION = "InDev 0.1.3";
 
     public static int windowWidth = 1080, windowHeight = 720;
     public static int fps = 60;
@@ -35,14 +35,13 @@ public class GameWindow extends Application {
         mainStage = primaryStage;
 
         //Gets the game jarfile
-        ClassFunctions functions = new ClassFunctions();
         File jarFile = getJarFile();
 
         //Gets the main configuration file from the jarFile resources folder
         // and grabs the values from it to configure
         //the window properties and the Main class
 
-        FileContents file = functions.getFile(jarFile, "config.defi");
+        FileContents file = ClassFunctions.getFile(jarFile, "config.defi");
         windowHeight = file.getInt("height");
         windowWidth = file.getInt("width");
         fps = file.getInt("fps");
@@ -98,8 +97,7 @@ public class GameWindow extends Application {
      * @return
      */
     private static Class getMainClass(String mainClass, File jarFile) {
-        ClassFunctions functions = new ClassFunctions();
-        return functions.getClass(jarFile, mainClass);
+        return ClassFunctions.getClass(jarFile, mainClass);
     }
 
     /**
@@ -109,7 +107,6 @@ public class GameWindow extends Application {
     private static File getJarFile() {
         File file = new File(System.getProperty("user.dir"));
         File currentFile = new ClassFunctions().currentRunningJar();
-        ClassFunctions functions = new ClassFunctions();
         for(File f : file.listFiles()) {
             if(f.getName().contains(".jar")) {
                 if (!(f.getAbsolutePath() + f.getName()).equals(currentFile.getAbsolutePath() + currentFile.getName())) {

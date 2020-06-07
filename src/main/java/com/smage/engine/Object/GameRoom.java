@@ -13,6 +13,7 @@ public class GameRoom {
     Timer timer;
     GameWindow window;
     GraphicsContext graphicsContext;
+    public Paint backgroundColor = Color.BLACK;
 
     public GameRoom(GameWindow window) {
         this.timer = new Timer(window.fps, this);
@@ -57,7 +58,7 @@ public class GameRoom {
     }
 
     private void cleanWindow() {
-        graphicsContext.setFill(Color.BLACK);
+        graphicsContext.setFill(backgroundColor);
         graphicsContext.fillRect(0,0, GameWindow.windowWidth + 10, GameWindow.windowHeight + 10);
     }
 }

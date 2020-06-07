@@ -1,6 +1,7 @@
 package com.smage.engine.Utilities;
 
 import com.smage.engine.IO.FileContents;
+import com.smage.engine.Object.GameWindow;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,8 +21,8 @@ public class ClassFunctions {
      * Gets the class loader from this class for grabbing classes
      * @return Class loader created
      */
-    private ClassLoader getClassLoader() {
-        return this.getClass().getClassLoader();
+    private static ClassLoader getClassLoader() {
+        return ClassFunctions.class.getClassLoader();
     }
 
     /**
@@ -30,7 +31,7 @@ public class ClassFunctions {
      * @param parent ClassLoader that we are mapping this to
      * @return The URL class loader
      */
-    private URLClassLoader urlClassLoader(File jarFile, ClassLoader parent) {
+    private static URLClassLoader urlClassLoader(File jarFile, ClassLoader parent) {
             try {
                 return new URLClassLoader(new URL[]{jarFile.toURI().toURL()}, parent);
             } catch (MalformedURLException e) {
@@ -46,7 +47,7 @@ public class ClassFunctions {
      *             i.e com.smage.testing.MainClass
      * @return Class found
      */
-    public Class getClass(File file, String name) {
+    public static Class getClass(File file, String name) {
         try {
             URLClassLoader loader = urlClassLoader(file, getClassLoader());
             return Class.forName(name, true, loader);
@@ -62,7 +63,7 @@ public class ClassFunctions {
      * @param name Name of the file
      * @return The FileContents file needed. This will allow us to automatically read the contents of the file
      */
-    public FileContents getFile(File jarFile, String name) {
+    public static FileContents getFile(File jarFile, String name) {
         try (JarFile jar = new JarFile(jarFile)) {
             JarEntry entry = jar.getJarEntry(name);
             if(entry != null) {
@@ -81,9 +82,9 @@ public class ClassFunctions {
      * Get the current running jar
      * @return File of the current running jar
      */
-    public File currentRunningJar() {
+    public static File currentRunningJar() {
         try {
-            return new File(this.getClass().getProtectionDomain().getCodeSource().getLocation().toURI());
+            return new File(ClassFunctions.class.getProtectionDomain().getCodeSource().getLocation().toURI());
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
