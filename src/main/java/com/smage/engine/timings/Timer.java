@@ -1,6 +1,6 @@
-package com.smage.engine.Timings;
+package com.smage.engine.timings;
 
-import com.smage.engine.Object.GameRoom;
+import com.smage.engine.object.GameRoom;
 
 public class Timer extends Thread {
     private GameRoom room;

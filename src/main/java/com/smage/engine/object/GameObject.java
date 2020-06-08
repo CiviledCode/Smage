@@ -1,8 +1,6 @@
-package com.smage.engine.Object;
+package com.smage.engine.object;
 
 import javafx.scene.canvas.GraphicsContext;
-
-import java.awt.*;
 
 public class GameObject {
 

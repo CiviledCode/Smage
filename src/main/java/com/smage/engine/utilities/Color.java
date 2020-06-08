@@ -1,4 +1,4 @@
-package com.smage.engine.Utilities;
+package com.smage.engine.utilities;
 
 import javafx.scene.paint.Paint;
 

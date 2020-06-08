@@ -1,7 +1,6 @@
-package com.smage.engine.Utilities;
+package com.smage.engine.utilities;
 
-import com.smage.engine.IO.FileContents;
-import com.smage.engine.Object.GameWindow;
+import com.smage.engine.io.FileContents;
 
 import java.io.File;
 import java.io.IOException;

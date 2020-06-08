@@ -1,7 +1,7 @@
-package com.smage.engine.Object;
+package com.smage.engine.object;
 
-import com.smage.engine.Timings.Timer;
-import com.smage.engine.Utilities.Color;
+import com.smage.engine.timings.Timer;
+import com.smage.engine.utilities.Color;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Paint;
 

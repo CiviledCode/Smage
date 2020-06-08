@@ -1,7 +1,7 @@
-package com.smage.engine.Object;
+package com.smage.engine.object;
 
-import com.smage.engine.IO.FileContents;
-import com.smage.engine.Utilities.ClassFunctions;
+import com.smage.engine.io.FileContents;
+import com.smage.engine.utilities.ClassFunctions;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Group;

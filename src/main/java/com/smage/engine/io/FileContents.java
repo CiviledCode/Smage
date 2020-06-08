@@ -1,8 +1,7 @@
-package com.smage.engine.IO;
+package com.smage.engine.io;
 
 import java.io.*;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class FileContents {
